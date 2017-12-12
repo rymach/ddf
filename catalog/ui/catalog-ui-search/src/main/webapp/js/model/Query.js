@@ -17,6 +17,7 @@ define([
         'properties',
         'js/cql',
         'js/model/QueryResponse',
+        'js/model/QuerySchedule',
         'component/singletons/sources-instance',
         'js/Common',
         'js/CacheSourceSelector',
@@ -26,7 +27,7 @@ define([
         'lodash/merge',
         'backboneassociations',
     ],
-    function (Backbone, _, properties, cql, QueryResponse, Sources, Common, CacheSourceSelector, announcement,
+    function (Backbone, _, properties, cql, QueryResponse, QuerySchedule, Sources, Common, CacheSourceSelector, announcement,
         CQLUtils, user, _merge) {
         "use strict";
         var Query = {};
@@ -65,6 +66,10 @@ define([
                 key: 'result',
                 relatedModel: QueryResponse,
                 isTransient: true
+            }, {
+                type: Backbone.Many,
+                key: 'schedules',
+                relatedModel: QuerySchedule
             }],
             //in the search we are checking for whether or not the model
             //only contains 5 items to know if we can search or not
@@ -83,7 +88,14 @@ define([
                     result: undefined,
                     serverPageIndex: 0,
                     type: 'text',
-                    isLocal: false
+                    isLocal: false,
+                    schedules: []
+                    // isScheduled: false,
+                    // scheduleAmount: 1,
+                    // scheduleUnit: 'weeks',
+                    // scheduleStart: '',
+                    // scheduleEnd: '',
+                    // subscribedUsers: []
                 }, user.getQuerySettings().toJSON());
             },
             resetToDefaults: function() {
