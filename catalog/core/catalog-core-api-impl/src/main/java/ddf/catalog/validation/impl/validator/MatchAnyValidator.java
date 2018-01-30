@@ -14,14 +14,16 @@
 package ddf.catalog.validation.impl.validator;
 
 import ddf.catalog.data.Attribute;
+import ddf.catalog.data.impl.AttributeImpl;
 import ddf.catalog.validation.AttributeValidator;
 import ddf.catalog.validation.impl.report.AttributeValidationReportImpl;
 import ddf.catalog.validation.report.AttributeValidationReport;
 import ddf.catalog.validation.violation.ValidationViolation;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.apache.commons.collections.CollectionUtils;
 
 public class MatchAnyValidator implements AttributeValidator {
@@ -37,42 +39,62 @@ public class MatchAnyValidator implements AttributeValidator {
       return Optional.empty();
     }
 
-    List<Optional<AttributeValidationReport>> validationReportList =
-        validators
-            .stream()
-            .map(validator -> validator.validate(attribute))
-            .collect(Collectors.toList());
+    List<Serializable> serializables = attribute.getValues();
+    List<Optional<AttributeValidationReport>> resultValidationReportList = new ArrayList<>();
 
-    return generateValidationReports(validationReportList);
+    for (Serializable serializable : serializables) {
+
+      List<Optional<AttributeValidationReport>> validationReportList =
+          validateAttributeSerializable(attribute.getName(), serializable);
+
+      if (validationReportList.size() == validators.size()) {
+        resultValidationReportList.addAll(validationReportList);
+      }
+    }
+
+    return generateValidationReports(resultValidationReportList);
+  }
+
+  private List<Optional<AttributeValidationReport>> validateAttributeSerializable(
+      String attributeName, Serializable serializable) {
+    List<Optional<AttributeValidationReport>> validationReportList = new ArrayList<>();
+    for (AttributeValidator attributeValidator : validators) {
+      Attribute newAttribute = new AttributeImpl(attributeName, serializable);
+      Optional<AttributeValidationReport> attributeValidationReport =
+          attributeValidator.validate(newAttribute);
+      if (attributeValidationReport.isPresent()) {
+        validationReportList.add(attributeValidationReport);
+      }
+    }
+    return validationReportList;
   }
 
   private Optional<AttributeValidationReport> generateValidationReports(
       List<Optional<AttributeValidationReport>> validationReportList) {
+
+    if (CollectionUtils.isEmpty(validationReportList)) {
+      return Optional.empty();
+    }
 
     AttributeValidationReportImpl result = new AttributeValidationReportImpl();
 
     for (Optional<AttributeValidationReport> attributeValidationReportOptional :
         validationReportList) {
 
-      if (attributeValidationReportOptional.isPresent()) {
-        AttributeValidationReport attributeValidationReport =
-            attributeValidationReportOptional.get();
+      AttributeValidationReport attributeValidationReport = attributeValidationReportOptional.get();
 
-        Set<ValidationViolation> validationViolations =
-            attributeValidationReport.getAttributeValidationViolations();
-        Set<String> suggestedValues = attributeValidationReport.getSuggestedValues();
+      Set<ValidationViolation> validationViolations =
+          attributeValidationReport.getAttributeValidationViolations();
+      Set<String> suggestedValues = attributeValidationReport.getSuggestedValues();
 
-        if (CollectionUtils.isEmpty(validationViolations)) {
-          return Optional.empty();
-        }
-
-        result.addViolations(validationViolations);
-
-        if (CollectionUtils.isNotEmpty(suggestedValues)) {
-          result.addSuggestedValues(suggestedValues);
-        }
-      } else {
+      if (CollectionUtils.isEmpty(validationViolations)) {
         return Optional.empty();
+      }
+
+      result.addViolations(validationViolations);
+
+      if (CollectionUtils.isNotEmpty(suggestedValues)) {
+        result.addSuggestedValues(suggestedValues);
       }
     }
     return Optional.of(result);

@@ -23,9 +23,11 @@ import static org.mockito.Mockito.when;
 import com.google.common.collect.ImmutableSet;
 import ddf.catalog.data.impl.AttributeImpl;
 import ddf.catalog.data.types.Core;
+import ddf.catalog.data.types.Location;
 import ddf.catalog.validation.impl.report.AttributeValidationReportImpl;
 import ddf.catalog.validation.impl.validator.EnumerationValidator;
 import ddf.catalog.validation.impl.validator.MatchAnyValidator;
+import ddf.catalog.validation.impl.validator.PatternValidator;
 import ddf.catalog.validation.impl.validator.SizeValidator;
 import ddf.catalog.validation.report.AttributeValidationReport;
 import java.util.Arrays;
@@ -48,7 +50,19 @@ public class MatchAnyValidatorTest {
 
   private static final Set<String> VALID_ENUMERATIONS_2 = ImmutableSet.of("ben");
 
+  private static final Set<String> VALID_COUNTRY_CODE_ENUMERATIONS =
+      ImmutableSet.of("USA", "CHN", "IND", "ITA", "VNM", "KOR");
+
+  private static final AttributeImpl COUNTRY_CODE_ATTRIBUTE =
+      new AttributeImpl(
+          Location.COUNTRY_CODE, Arrays.asList("USA", "VNM", "KOR", "CHN", "IND", "XKX", "ITA"));
+
+  private static final String COUNTRY_CODE_PATTERN =
+      "^(AA[A-Z])|(Q[M-Z][A-Z])|(X[A-Z][A-Z])|(ZZ[A-Z])$";
+
   private MatchAnyValidator matchAnyValidator;
+
+  private PatternValidator patternValidator;
 
   private EnumerationValidator stubEmptyValidator;
 
@@ -56,16 +70,31 @@ public class MatchAnyValidatorTest {
 
   private EnumerationValidator enumerationValidator2;
 
+  private EnumerationValidator countryCodeEnumerationValidator;
+
   @Before
   public void setUp() {
     stubEmptyValidator = mock(EnumerationValidator.class);
     when(stubEmptyValidator.validate(Matchers.any(AttributeImpl.class)))
         .thenReturn(Optional.of(new AttributeValidationReportImpl()));
 
+    patternValidator = new PatternValidator(COUNTRY_CODE_PATTERN);
     enumerationValidator = new EnumerationValidator(VALID_ENUMERATIONS, false);
     enumerationValidator2 = new EnumerationValidator(VALID_ENUMERATIONS_2, false);
+    countryCodeEnumerationValidator =
+        new EnumerationValidator(VALID_COUNTRY_CODE_ENUMERATIONS, false);
+
     SizeValidator sizeValidator = new SizeValidator(1, 3);
     matchAnyValidator = new MatchAnyValidator(Arrays.asList(enumerationValidator, sizeValidator));
+  }
+
+  @Test
+  public void testMatchAnyValidatorPassesWhenAttributeIsMultivalued() {
+    matchAnyValidator =
+        new MatchAnyValidator(Arrays.asList(countryCodeEnumerationValidator, patternValidator));
+    Optional<AttributeValidationReport> attributeValidationReportOptional =
+        matchAnyValidator.validate(COUNTRY_CODE_ATTRIBUTE);
+    assertThat(attributeValidationReportOptional.isPresent(), is(false));
   }
 
   @Test
