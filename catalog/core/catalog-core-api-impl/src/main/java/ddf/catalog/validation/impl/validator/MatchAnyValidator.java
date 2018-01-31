@@ -39,12 +39,12 @@ public class MatchAnyValidator implements AttributeValidator {
       return Optional.empty();
     }
 
-    List<Serializable> serializables = attribute.getValues();
-    List<Optional<AttributeValidationReport>> resultValidationReportList = new ArrayList<>();
+    List<Serializable> attributeValues = attribute.getValues();
+    List<AttributeValidationReport> resultValidationReportList = new ArrayList<>();
 
-    for (Serializable serializable : serializables) {
+    for (Serializable serializable : attributeValues) {
 
-      List<Optional<AttributeValidationReport>> validationReportList =
+      List<AttributeValidationReport> validationReportList =
           validateAttributeSerializable(attribute.getName(), serializable);
 
       if (validationReportList.size() == validators.size()) {
@@ -55,22 +55,22 @@ public class MatchAnyValidator implements AttributeValidator {
     return generateValidationReports(resultValidationReportList);
   }
 
-  private List<Optional<AttributeValidationReport>> validateAttributeSerializable(
+  private List<AttributeValidationReport> validateAttributeSerializable(
       String attributeName, Serializable serializable) {
-    List<Optional<AttributeValidationReport>> validationReportList = new ArrayList<>();
+    List<AttributeValidationReport> validationReportList = new ArrayList<>();
     for (AttributeValidator attributeValidator : validators) {
       Attribute newAttribute = new AttributeImpl(attributeName, serializable);
       Optional<AttributeValidationReport> attributeValidationReport =
           attributeValidator.validate(newAttribute);
       if (attributeValidationReport.isPresent()) {
-        validationReportList.add(attributeValidationReport);
+        validationReportList.add(attributeValidationReport.get());
       }
     }
     return validationReportList;
   }
 
   private Optional<AttributeValidationReport> generateValidationReports(
-      List<Optional<AttributeValidationReport>> validationReportList) {
+      List<AttributeValidationReport> validationReportList) {
 
     if (CollectionUtils.isEmpty(validationReportList)) {
       return Optional.empty();
@@ -78,10 +78,7 @@ public class MatchAnyValidator implements AttributeValidator {
 
     AttributeValidationReportImpl result = new AttributeValidationReportImpl();
 
-    for (Optional<AttributeValidationReport> attributeValidationReportOptional :
-        validationReportList) {
-
-      AttributeValidationReport attributeValidationReport = attributeValidationReportOptional.get();
+    for (AttributeValidationReport attributeValidationReport : validationReportList) {
 
       Set<ValidationViolation> validationViolations =
           attributeValidationReport.getAttributeValidationViolations();
