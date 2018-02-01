@@ -16,7 +16,16 @@
    ]]></notes>
         <cve>CVE-2016-3720</cve>
     </suppress>
-
+    <suppress>
+        <notes>
+            FasterXML jackson-databind through 2.8.10 and 2.9.x through 2.9.3 allows unauthenticated remote code
+            execution because of an incomplete fix for the CVE-2017-7525 deserialization flaw. This is exploitable by
+            sending maliciously crafted JSON input to the readValue method of the ObjectMapper, bypassing a blacklist
+            that is ineffective if the Spring libraries are available in the classpath.
+            We have upgraded to 2.9.4 which fixes the issue but owasp doesn't recognize this
+        </notes>
+        <cve>CVE-2017-17485</cve>
+    </suppress>
     <suppress>
         <notes>
             CVE-2016-1000031: Applies to commons-fileupload-1.2.1, suppressing because the vulnerable class DiskFileItem is not used in the project
