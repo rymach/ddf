@@ -511,11 +511,10 @@ public class SolrMetacardClientImpl implements SolrMetacardClient {
     }
   }
 
-  protected String setSortProperty(
+  private void setSortProperty(
       QueryRequest request, SolrQuery query, SolrFilterDelegate solrFilterDelegate) {
 
     List<SortBy> sortBys = new ArrayList<>();
-    String sortProperty = "";
     if (request.getQuery() != null) {
       SortBy querySortBy = request.getQuery().getSortBy();
       if (querySortBy != null && querySortBy.getPropertyName() != null) {
@@ -532,7 +531,7 @@ public class SolrMetacardClientImpl implements SolrMetacardClient {
     }
 
     for (SortBy sortBy : sortBys) {
-      sortProperty = sortBy.getPropertyName().getPropertyName();
+      String sortProperty = sortBy.getPropertyName().getPropertyName();
       SolrQuery.ORDER order = SolrQuery.ORDER.desc;
 
       if (sortBy.getSortOrder() == SortOrder.ASCENDING) {
@@ -545,7 +544,7 @@ public class SolrMetacardClientImpl implements SolrMetacardClient {
         query.addSort(RELEVANCE_SORT_FIELD, order);
       } else if (Result.DISTANCE.equals(sortProperty)) {
         addDistanceSort(query, GEOMETRY_SORT_FIELD, order, solrFilterDelegate);
-      } else if (sortProperty.equals(Result.TEMPORAL)) {
+      } else if (Result.TEMPORAL.equals(sortProperty)) {
         query.addSort(
             resolver.getSortKey(
                 resolver.getField(Metacard.EFFECTIVE, AttributeType.AttributeFormat.DATE, false)),
@@ -569,7 +568,6 @@ public class SolrMetacardClientImpl implements SolrMetacardClient {
         }
       }
     }
-    return resolver.getSortKey(sortProperty);
   }
 
   private ResultImpl createResult(SolrDocument doc) throws MetacardCreationException {
