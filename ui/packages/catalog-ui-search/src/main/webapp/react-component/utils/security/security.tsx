@@ -98,10 +98,11 @@ export class Security {
     return this.canAccess(user, Access.Share)
   }
 
-  isShared() {
+  isShared(): boolean {
     return !(
       this.res.accessGroups.length == 0 &&
       this.res.accessGroupsRead.length == 0 &&
+      this.res.accessIndividuals.length == 0 &&
       this.res.accessIndividuals.length == 0 &&
       this.res.accessIndividualsRead.length == 0 &&
       (this.res.accessAdministrators.length == 0 ||
