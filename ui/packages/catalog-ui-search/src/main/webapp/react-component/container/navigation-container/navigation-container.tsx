@@ -13,7 +13,7 @@ import * as React from 'react'
 import Navigation from '../../presentation/navigation'
 import withListenTo, { WithBackboneProps } from '../backbone-container'
 
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const wreqr = require('../../../js/wreqr.js')
 const sources = require('../../../component/singletons/sources-instance.js')
 const properties = require('../../../js/properties.js')

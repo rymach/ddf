@@ -234,7 +234,7 @@ module.exports = Backbone.AssociatedModel.extend({
         result.metacard.queryId = queryId
         result.metacard.color = color
         humanizeResourceSize(result)
-        handleResultFormFields(result, selectedResultTemplate)
+        //handleResultFormFields(result, selectedResultTemplate)
         result.actions.forEach(action => (action.queryId = queryId))
 
         var thumbnailAction = _.findWhere(result.actions, {

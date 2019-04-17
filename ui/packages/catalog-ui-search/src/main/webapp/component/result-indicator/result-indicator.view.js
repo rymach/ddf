@@ -15,7 +15,7 @@
 
 import * as React from 'react'
 const Marionette = require('marionette')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 import ResultIndicator from './result-indicator'
 
 module.exports = Marionette.ItemView.extend({

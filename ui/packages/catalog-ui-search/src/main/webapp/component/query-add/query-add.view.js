@@ -21,7 +21,7 @@ const QueryAdvanced = require('../query-advanced/query-advanced.view.js')
 const QueryTitle = require('../query-title/query-title.view.js')
 const QueryAdhoc = require('../query-adhoc/query-adhoc.view.js')
 const Query = require('../../js/model/Query.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const QueryConfirmationView = require('../confirmation/query/confirmation.query.view.js')
 const LoadingView = require('../loading/loading.view.js')
 const wreqr = require('../../js/wreqr.js')

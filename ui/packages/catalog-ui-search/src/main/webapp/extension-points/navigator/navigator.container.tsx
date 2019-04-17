@@ -3,7 +3,7 @@ import { Props as PresentationProps } from './navigator.presentation'
 import withListenTo, {
   WithBackboneProps,
 } from '../../react-component/container/backbone-container'
-const store = require('../../js/store')
+import { store } from '../../js/store'
 const sources = require('../../component/singletons/sources-instance')
 const properties = require('../../js/properties.js')
 const metacard = require('../../component/metacard/metacard')

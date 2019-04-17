@@ -19,7 +19,7 @@
 */
 const $ = require('jquery')
 const CustomElements = require('../js/CustomElements.js')
-const store = require('../js/store.js')
+import { store } from '../js/store'
 
 module.exports = {
   drawing(event) {

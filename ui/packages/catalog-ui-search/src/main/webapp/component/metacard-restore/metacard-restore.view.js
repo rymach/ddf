@@ -19,7 +19,7 @@ const $ = require('jquery')
 const template = require('./metacard-restore.hbs')
 const itemTemplate = require('./metacard-restore-item.hbs')
 const CustomElements = require('../../js/CustomElements.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const cql = require('../../js/cql.js')
 const Query = require('../../js/model/Query.js')
 

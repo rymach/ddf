@@ -11,7 +11,7 @@
  **/
 
 var Marionette = require('marionette')
-var store = require('../../../js/store.js')
+var store = require('../../../js/store')
 var iconHelper = require('../../../js/IconHelper.js')
 var _ = require('underscore')
 var _debounce = require('lodash/debounce')

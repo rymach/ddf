@@ -15,7 +15,7 @@
 /* global require */
 var TabsView = require('../tabs.view')
 var ResultFormModel = require('./tabs.result-form')
-var store = require('../../../js/store.js')
+var store = require('../../../js/store')
 
 module.exports = TabsView.extend({
   selectionInterface: store,

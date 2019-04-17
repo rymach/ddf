@@ -23,7 +23,7 @@ const Marionette = require('marionette')
 const _ = require('underscore')
 const CustomElements = require('../../js/CustomElements.js')
 const IconHelper = require('../../js/IconHelper.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const Common = require('../../js/Common.js')
 const DropdownModel = require('../dropdown/dropdown.js')
 const ResultIndicatorView = require('../result-indicator/result-indicator.view.js')

@@ -13,7 +13,7 @@ import { buttonTypeEnum, Button } from '../button'
 
 const ListEditorView = require('../../../component/list-editor/list-editor.view.js')
 const List = require('../../../js/model/List.js')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const ConfirmationView = require('../../../component/confirmation/confirmation.view.js')
 
 const CreateContainer = styled.div`

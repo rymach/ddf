@@ -19,7 +19,7 @@ const $ = require('jquery')
 const workspaceExploreTemplate = require('./workspace-explore.hbs')
 const CustomElements = require('../../js/CustomElements.js')
 const QuerySelectorView = require('../query-selector/query-selector.view.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const lightboxViewInstance = require('../lightbox/lightbox.view.instance.js')
 
 var WorkspaceExplore = Marionette.LayoutView.extend({

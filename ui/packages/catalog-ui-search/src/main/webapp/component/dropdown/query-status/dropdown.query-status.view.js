@@ -19,7 +19,7 @@ const $ = require('jquery')
 const DropdownView = require('../dropdown.view')
 const template = require('./dropdown.query-status.hbs')
 const ComponentView = require('../../query-status/query-status.view.js')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 
 module.exports = DropdownView.extend({
   template: template,

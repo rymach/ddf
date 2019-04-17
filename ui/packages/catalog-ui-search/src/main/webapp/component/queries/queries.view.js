@@ -20,7 +20,7 @@ const queriesTemplate = require('./queries.hbs')
 const CustomElements = require('../../js/CustomElements.js')
 const QueryTabsView = require('../tabs/query/tabs-query.view.js')
 const QuerySelectorView = require('../query-selector/query-selector.view.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 
 var Queries = Marionette.LayoutView.extend({
   setDefaultModel: function() {

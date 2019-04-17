@@ -19,7 +19,7 @@ const $ = require('jquery')
 const DropdownView = require('../dropdown.view')
 const template = require('./dropdown.search-form-selector.hbs')
 const SearchFormsList = require('../../search-form-list/search-form-list.view')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const SearchFormCollection = require('../../search-form/search-form-collection-instance')
 const Backbone = require('backbone')
 

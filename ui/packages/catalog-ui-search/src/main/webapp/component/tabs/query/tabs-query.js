@@ -12,7 +12,7 @@
 
 const _ = require('underscore')
 const Tabs = require('../tabs')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const QuerySettingsView = require('../../query-settings/query-settings.view.js')
 const QueryStatusView = require('../../query-status/query-status.view.js')
 const QueryScheduleView = require('../../query-schedule/query-schedule.view.js')

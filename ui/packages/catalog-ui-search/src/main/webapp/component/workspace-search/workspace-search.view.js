@@ -18,7 +18,7 @@ var CustomElements = require('../../js/CustomElements.js')
 var template = require('./workspace-search.hbs')
 var ResultsView = require('../results/results.view.js')
 var SearchesView = require('../workspace-explore/workspace-explore.view.js')
-var store = require('../../js/store.js')
+var store = require('../../js/store')
 
 module.exports = Marionette.LayoutView.extend({
   template: template,

@@ -10,7 +10,7 @@
  *
  **/
 
-var store = require('./store.js')
+var store = require('./store')
 var alert = require('../component/alert/alert.js')
 var _ = require('underscore')
 var metacardDefinitions = require('../component/singletons/metacard-definitions.js')

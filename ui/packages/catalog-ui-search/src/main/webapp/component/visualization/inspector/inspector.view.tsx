@@ -15,6 +15,7 @@
 
 import * as React from 'react'
 import styled from '../../../react-component/styles/styled-components'
+// import Store from '../../../js/store'
 
 const Marionette = require('marionette')
 const CustomElements = require('../../../js/CustomElements.js')
@@ -42,6 +43,10 @@ const Content = styled.div`
   height: calc(100% - ${props => props.theme.minimumButtonSize});
 `
 
+type Options = {
+  selectionInterface: string
+}
+
 module.exports = Marionette.LayoutView.extend({
   tagName: CustomElements.register('inspector'),
   template: () => (
@@ -62,7 +67,7 @@ module.exports = Marionette.LayoutView.extend({
       selector: '.inspector-title',
     },
   },
-  initialize: function(options) {
+  initialize: function(options: Options) {
     if (!options.selectionInterface) {
       throw 'Selection interface has not been provided'
     }

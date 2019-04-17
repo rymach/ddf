@@ -22,7 +22,7 @@ const MetaCard = require('../../js/model/Metacard.js')
 const wreqr = require('../../js/wreqr.js')
 const template = require('./query-annotations.hbs')
 const maptype = require('../../js/maptype.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const CustomElements = require('../../js/CustomElements.js')
 const PropertyView = require('../property/property.view.js')
 const Property = require('../property/property.js')

@@ -19,7 +19,7 @@ const _ = require('underscore')
 const $ = require('jquery')
 const template = require('./query-adhoc.hbs')
 const CustomElements = require('../../js/CustomElements.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const PropertyView = require('../property/property.view.js')
 const Property = require('../property/property.js')
 const user = require('../singletons/user-instance.js')

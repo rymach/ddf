@@ -13,7 +13,7 @@
  *
  **/
 
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const ConfirmationView = require('../confirmation/confirmation.view.js')
 const Dropzone = require('dropzone')
 const OverwritesInstance = require('../singletons/overwrites-instance.js')

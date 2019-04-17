@@ -14,7 +14,7 @@ import { hot } from 'react-hot-loader'
 import withListenTo, { WithBackboneProps } from '../backbone-container'
 import fetch from '../../utils/fetch'
 const announcement = require('component/announcement')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const ResultUtils = require('../../../js/ResultUtils.js')
 const ConfirmationView = require('../../../component/confirmation/confirmation.view.js')
 import MetacardArchivePresentation from '../../presentation/metacard-archive'

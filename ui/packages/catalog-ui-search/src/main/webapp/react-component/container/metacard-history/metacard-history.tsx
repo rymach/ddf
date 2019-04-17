@@ -13,7 +13,7 @@
 import { hot } from 'react-hot-loader'
 import * as React from 'react'
 import fetch from '../../utils/fetch'
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const Common = require('../../../js/Common.js')
 const ResultUtils = require('../../../js/ResultUtils.js')
 const moment = require('moment')

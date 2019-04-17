@@ -4,7 +4,7 @@ const QueryConfirmationView = require('../../../component/confirmation/query/con
 const LoadingView = require('../../../component/loading/loading.view')
 
 import { Geometry } from 'wkx'
-const store = require('../../../js/store')
+import { store } from '../../../js/store'
 
 import { MetacardInteraction } from '../../presentation/metacard-interactions/metacard-interactions'
 import { Props, Model, Result } from './'

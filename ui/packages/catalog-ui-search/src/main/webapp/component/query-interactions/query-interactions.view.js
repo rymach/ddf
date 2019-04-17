@@ -19,7 +19,7 @@ const _ = require('underscore')
 const $ = require('jquery')
 import * as React from 'react'
 const CustomElements = require('../../js/CustomElements.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const lightboxInstance = require('../lightbox/lightbox.view.instance.js')
 const QueryFeedbackView = require('../query-feedback/query-feedback.view.js')
 const QueryConfirmationView = require('../confirmation/query/confirmation.query.view.js')

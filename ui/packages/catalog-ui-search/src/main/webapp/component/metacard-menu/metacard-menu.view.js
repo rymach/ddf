@@ -20,7 +20,7 @@ const _ = require('underscore')
 const $ = require('jquery')
 const template = require('./metacard-menu.hbs')
 const CustomElements = require('../../js/CustomElements.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const metacardInstance = require('../metacard/metacard.js')
 const MetacardTitleView = require('../metacard-title/metacard-title.view.js')
 

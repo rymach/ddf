@@ -17,7 +17,7 @@ import ListCreate from '../list-create/list-create.js'
 var Marionette = require('marionette')
 var CustomElements = require('../../js/CustomElements.js')
 var template = require('./workspace-lists.hbs')
-var store = require('../../js/store.js')
+var store = require('../../js/store')
 var ListSelectorView = require('../dropdown/list-select/dropdown.list-select.view.js')
 var DropdownModel = require('../dropdown/dropdown.js')
 var ResultSelectorView = require('../result-selector/result-selector.view.js')

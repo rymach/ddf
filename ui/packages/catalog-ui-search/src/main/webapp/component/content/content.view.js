@@ -23,7 +23,7 @@ const properties = require('../../js/properties.js')
 const WorkspaceContentTabs = require('../tabs/workspace-content/tabs-workspace-content.js')
 const WorkspaceContentTabsView = require('../tabs/workspace-content/tabs-workspace-content.view.js')
 const QueryTabsView = require('../tabs/query/tabs-query.view.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const MetacardTabsView = require('../tabs/metacard/tabs-metacard.view.js')
 const MetacardsTabsView = require('../tabs/metacards/tabs-metacards.view.js')
 const Common = require('../../js/Common.js')

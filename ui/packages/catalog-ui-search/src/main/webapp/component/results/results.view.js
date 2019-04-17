@@ -20,7 +20,7 @@ const resultsTemplate = require('./results.hbs')
 const CustomElements = require('../../js/CustomElements.js')
 const QuerySelectDropdown = require('../dropdown/query-select/dropdown.query-select.view.js')
 const DropdownModel = require('../dropdown/dropdown.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const ResultSelectorView = require('../result-selector/result-selector.view.js')
 const WorkspaceExploreView = require('../workspace-explore/workspace-explore.view.js')
 

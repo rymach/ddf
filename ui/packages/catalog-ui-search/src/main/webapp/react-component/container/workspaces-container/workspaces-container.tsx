@@ -13,7 +13,7 @@ import * as React from 'react'
 import Workspaces from '../../presentation/workspaces'
 
 import withListenTo, { WithBackboneProps } from '../backbone-container'
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 
 function hasUnsaved() {
   return store.get('workspaces').find(function(workspace: any) {

@@ -18,7 +18,7 @@ const _ = require('underscore')
 const $ = require('jquery')
 const TabsView = require('../tabs.view')
 const QueryTabsModel = require('./tabs-query')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 
 var QueryTabsView = TabsView.extend({
   className: 'is-query',

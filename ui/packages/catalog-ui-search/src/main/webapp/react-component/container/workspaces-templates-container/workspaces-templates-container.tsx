@@ -13,7 +13,7 @@ import * as React from 'react'
 import WorkspacesTemplates from '../../presentation/workspaces-templates'
 import { hot } from 'react-hot-loader'
 
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const LoadingView = require('../../../component/loading/loading.view.js')
 const wreqr = require('../../../js/wreqr.js')
 const properties = require('../../../js/properties.js')

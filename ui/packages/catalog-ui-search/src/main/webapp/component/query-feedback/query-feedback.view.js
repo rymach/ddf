@@ -15,7 +15,7 @@
 
 var Marionette = require('marionette')
 var CustomElements = require('../../js/CustomElements.js')
-var store = require('../../js/store.js')
+var store = require('../../js/store')
 var template = require('./query-feedback.hbs')
 var PropertyView = require('../property/property.view.js')
 var PropertyModel = require('../property/property.js')

@@ -13,7 +13,7 @@
 const _ = require('underscore')
 const Backbone = require('backbone')
 const usngs = require('usng.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const Common = require('../../js/Common.js')
 const dmsUtils = require('../location-new/utils/dms-utils.js')
 const DistanceUtils = require('../../js/DistanceUtils.js')

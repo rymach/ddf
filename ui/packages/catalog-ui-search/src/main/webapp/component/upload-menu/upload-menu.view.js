@@ -19,7 +19,7 @@ const _ = require('underscore')
 const $ = require('jquery')
 const template = require('./upload-menu.hbs')
 const CustomElements = require('../../js/CustomElements.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const uploadInstance = require('../upload/upload.js')
 const Common = require('../../js/Common.js')
 

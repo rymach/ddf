@@ -16,7 +16,7 @@ import withListenTo, { WithBackboneProps } from '../backbone-container'
 import { Sharing } from '../sharing'
 import { Security, Restrictions } from '../../utils/security'
 const user = require('../../../component/singletons/user-instance.js')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const lightboxInstance = require('../../../component/lightbox/lightbox.view.instance.js')
 const wreqr = require('../../../js/wreqr.js')
 const LoadingView = require('../../../component/loading/loading.view.js')

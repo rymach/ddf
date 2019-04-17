@@ -13,7 +13,7 @@
 import { hot } from 'react-hot-loader'
 import * as React from 'react'
 const _ = require('underscore')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 import MetacardActionsPresentation from '../../presentation/metacard-actions'
 
 type Props = {

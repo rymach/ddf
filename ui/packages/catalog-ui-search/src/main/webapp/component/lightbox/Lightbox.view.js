@@ -18,7 +18,7 @@ const _ = require('underscore')
 const $ = require('jquery')
 const LightboxTemplate = require('./Lightbox.hbs')
 const CustomElements = require('../../js/CustomElements.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const Lightbox = require('./Lightbox.js')
 const router = require('../router/router.js')
 const componentName = 'lightbox'

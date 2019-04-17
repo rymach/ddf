@@ -13,7 +13,7 @@
  *
  **/
 
-var store = require('../../../js/store.js')
+var store = require('../../../js/store')
 var SaveView = require('../save.view')
 
 module.exports = SaveView.extend({

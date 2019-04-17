@@ -10,31 +10,29 @@
  *
  **/
 
-const $ = require('jquery')
-const Backbone = require('backbone')
-const poller = require('backbone-poller')
-const _ = require('underscore')
+import * as Backbone from 'backbone';
 const WorkspaceCollection = require('./model/Workspace.collection.js')
 const Content = require('../component/content/content.js')
 const router = require('../component/router/router.js')
 
-module.exports = new (Backbone.Model.extend({
-  initialize: function() {
+export class Store extends Backbone.Model {
+  initialize () {
     this.set('content', new Content())
     this.set('workspaces', new WorkspaceCollection())
 
-    window.onbeforeunload = function() {
+    window.onbeforeunload = function () {
+      // @ts-ignore
       var unsaved = this.get('workspaces')
-        .chain()
-        .map(function(workspace) {
-          if (!workspace.isSaved()) {
-            return workspace.get('title')
-          }
-        })
-        .filter(function(title) {
-          return title !== undefined
-        })
-        .value()
+      .chain()
+      .map(function (workspace:any) {
+        if (!workspace.isSaved()) {
+          return workspace.get('title')
+        }
+      })
+      .filter(function (title:any) {
+        return title !== undefined
+      })
+      .value()
 
       if (unsaved.length > 0) {
         return (
@@ -44,9 +42,12 @@ module.exports = new (Backbone.Model.extend({
       }
     }.bind(this)
 
-    this.listenTo(this.get('workspaces'), 'remove', function() {
+    this.listenTo(this.get('workspaces'), 'remove', function () {
+      // @ts-ignore
       var currentWorkspace = this.getCurrentWorkspace()
+      // @ts-ignore
       if (currentWorkspace && !this.get('workspaces').get(currentWorkspace)) {
+        // @ts-ignore
         this.get('content').set('currentWorkspace', undefined)
       }
     })
@@ -57,8 +58,9 @@ module.exports = new (Backbone.Model.extend({
     )
     this.listenTo(router, 'change', this.handleRoute)
     this.handleRoute()
-  },
-  handleRoute() {
+  }
+
+  handleRoute () {
     if (router.toJSON().name === 'openWorkspace') {
       const workspaceId = router.get('args')[0]
       if (this.get('workspaces').get(workspaceId) !== undefined) {
@@ -67,15 +69,19 @@ module.exports = new (Backbone.Model.extend({
         router.notFound()
       }
     }
-  },
-  clearOtherWorkspaces: function(workspaceId) {
-    this.get('workspaces').forEach(function(workspaceModel) {
+  }
+
+  // @ts-ignore
+  clearOtherWorkspaces = (workspaceId) => {
+    // @ts-ignore
+    this.get('workspaces').forEach(function (workspaceModel) {
       if (workspaceId !== workspaceModel.id) {
         workspaceModel.clearResults()
       }
     })
-  },
-  handleWorkspaceChange: function() {
+  }
+
+  handleWorkspaceChange () {
     if (this.get('content').changedAttributes().currentWorkspace) {
       var previousWorkspace = this.get('content').previousAttributes()
         .currentWorkspace
@@ -86,72 +92,106 @@ module.exports = new (Backbone.Model.extend({
         previousWorkspace.clearResults()
       }
     }
-  },
-  getWorkspaceById: function(workspaceId) {
+  }
+
+  // @ts-ignore
+  getWorkspaceById (workspaceId) {
     return this.get('workspaces').get(workspaceId)
-  },
-  setCurrentWorkspaceById: function(workspaceId) {
+  }
+
+  // @ts-ignore
+  setCurrentWorkspaceById (workspaceId) {
     this.get('content').set(
       'currentWorkspace',
       this.get('workspaces').get(workspaceId)
     )
-  },
-  getCurrentWorkspace: function() {
+  }
+
+  getCurrentWorkspace () {
     return this.get('content').get('currentWorkspace')
-  },
-  getCurrentQueries: function() {
+  }
+
+  getCurrentQueries () {
     return this.getCurrentWorkspace().get('queries')
-  },
-  setQueryById: function(queryId) {
+  }
+
+  // @ts-ignore
+  setQueryById (queryId) {
     var queryRef = this.getCurrentQueries().get(queryId)
     this.setQueryByReference(queryRef.clone())
-  },
-  setQueryByReference: function(queryRef) {
+  }
+
+  // @ts-ignore
+  setQueryByReference (queryRef) {
     this.get('content').set('query', queryRef)
-  },
-  getQuery: function() {
+  }
+
+  getQuery () {
     return this.get('content').get('query')
-  },
-  getQueryById: function(queryId) {
+  }
+
+  // @ts-ignore
+  getQueryById (queryId) {
     return this.getCurrentQueries().get(queryId)
-  },
-  getSelectedResults: function() {
+  }
+
+  getSelectedResults () {
     return this.get('content').get('selectedResults')
-  },
-  clearSelectedResults: function() {
+  }
+
+  clearSelectedResults () {
     this.getSelectedResults().reset()
-  },
-  addSelectedResult: function(metacard) {
+  }
+
+  // @ts-ignore
+  addSelectedResult (metacard) {
     this.getSelectedResults().add(metacard)
-  },
-  removeSelectedResult: function(metacard) {
+  }
+
+  // @ts-ignore
+  removeSelectedResult (metacard) {
     this.getSelectedResults().remove(metacard)
-  },
-  getActiveSearchResultsAttributes: function() {
+  }
+
+  getActiveSearchResultsAttributes () {
     return this.get('content').getActiveSearchResultsAttributes()
-  },
-  getActiveSearchResults: function() {
+  }
+
+  getActiveSearchResults () {
     return this.get('content').getActiveSearchResults()
-  },
-  setActiveSearchResults: function(results) {
+  }
+
+  // @ts-ignore
+  setActiveSearchResults (results) {
     this.get('content').setActiveSearchResults(results)
-  },
-  addToActiveSearchResults: function(results) {
+  }
+
+  // @ts-ignore
+  addToActiveSearchResults (results) {
     this.get('content').addToActiveSearchResults(results)
-  },
-  saveCurrentWorkspace: function() {
+  }
+
+  saveCurrentWorkspace () {
     this.getCurrentWorkspace().save()
-  },
-  setCurrentQuery: function(query) {
+  }
+
+  // @ts-ignore
+  setCurrentQuery = (query) => {
     this.get('content').setCurrentQuery(query)
-  },
-  getCurrentQuery: function() {
+  }
+
+  getCurrentQuery () {
     return this.get('content').getCurrentQuery()
-  },
-  setWorkspaceRestrictions: function(workspaceId, restrictions) {
+  }
+
+  // @ts-ignore
+  setWorkspaceRestrictions (workspaceId, restrictions) {
     const metacard = this.getWorkspaceById(workspaceId)
-    restrictions.forEach(function(restriction) {
+    // @ts-ignore
+    restrictions.forEach(function (restriction) {
       metacard.attributes[restriction.attribute] = restriction.values
     })
-  },
-}))()
+  }
+}
+
+export const store = new Store()

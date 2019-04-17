@@ -15,7 +15,7 @@ var _ = require('underscore')
 var Map = require('../map')
 var utility = require('./utility')
 var DrawingUtility = require('../DrawingUtility')
-var store = require('../../../../js/store.js')
+var store = require('../../../../js/store')
 
 var DrawBBox = require('../../../../js/widgets/cesium.bbox.js')
 var DrawCircle = require('../../../../js/widgets/cesium.circle.js')

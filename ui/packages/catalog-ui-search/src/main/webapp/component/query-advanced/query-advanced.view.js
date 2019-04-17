@@ -19,7 +19,7 @@ const template = require('./query-advanced.hbs')
 const CustomElements = require('../../js/CustomElements.js')
 const FilterBuilderView = require('../filter-builder/filter-builder.view.js')
 const cql = require('../../js/cql.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const QuerySettingsView = require('../query-settings/query-settings.view.js')
 const user = require('../singletons/user-instance.js')
 const properties = require('../../js/properties.js')

@@ -19,7 +19,7 @@ import { MapContextMenu } from '../../react-component/presentation/map-context-m
 var _ = require('underscore')
 var Marionette = require('marionette')
 var CustomElements = require('../../js/CustomElements.js')
-var InspectorView = require('../visualization/inspector/inspector.view.js')
+var InspectorView = require('../visualization/inspector/inspector.view')
 var HistogramView = require('../visualization/histogram/histogram.view.js')
 var SelectionInterfaceModel = require('../selection-interface/selection-interface.model.js')
 var lightboxInstance = require('../lightbox/lightbox.view.instance.js')

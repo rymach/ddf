@@ -22,7 +22,7 @@ var CustomElements = require('../../../js/CustomElements.js')
 var CesiumView = require('../maps/cesium/cesium.view.js')
 var OpenlayersView = require('../maps/openlayers/openlayers.view.js')
 var Common = require('../../../js/Common.js')
-var store = require('../../../js/store.js')
+var store = require('../../../js/store')
 var user = require('../../singletons/user-instance.js')
 var featureDetection = require('../../singletons/feature-detection.js')
 

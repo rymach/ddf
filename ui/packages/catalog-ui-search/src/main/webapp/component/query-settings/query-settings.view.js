@@ -19,7 +19,7 @@ const _ = require('underscore')
 const $ = require('jquery')
 const template = require('./query-settings.hbs')
 const CustomElements = require('../../js/CustomElements.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const DropdownModel = require('../dropdown/dropdown.js')
 const QuerySrcView = require('../dropdown/query-src/dropdown.query-src.view.js')
 const PropertyView = require('../property/property.view.js')

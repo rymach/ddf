@@ -21,7 +21,7 @@ const template = require('./dropdown.query-select.hbs')
 const ComponentView = require('../../query-select/query-select.view.js')
 const QueryItemView = require('../../query-item/query-item.view.js')
 const SearchSelectView = require('../../search-select/search-select.view.js')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 
 module.exports = DropdownView.extend({
   template: template,

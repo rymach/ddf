@@ -16,7 +16,7 @@
 const Marionette = require('marionette')
 const TabsView = require('../tabs.view')
 const SearchFormTabsModel = require('./tabs.search-form')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const Query = require('../../../js/model/Query.js')
 
 module.exports = TabsView.extend({

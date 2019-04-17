@@ -19,7 +19,7 @@ const _ = require('underscore')
 const $ = require('jquery')
 const TabsView = require('../tabs.view')
 const MetacardTabsModel = require('./tabs-metacard')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 const properties = require('../../../js/properties.js')
 
 module.exports = TabsView.extend({

@@ -17,7 +17,7 @@ const Marionette = require('marionette')
 const _ = require('underscore')
 const $ = require('jquery')
 const CustomElements = require('../../js/CustomElements.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const QueryItemCollectionView = require('../query-item/query-item.collection.view.js')
 
 var eventsHash = {

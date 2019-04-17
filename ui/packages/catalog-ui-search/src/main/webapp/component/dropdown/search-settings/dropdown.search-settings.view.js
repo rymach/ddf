@@ -22,7 +22,7 @@ const CustomElements = require('../../../js/CustomElements.js')
 
 import React from 'react'
 import SearchSettings from '../../../react-component/presentation/search-settings/search-settings'
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 
 module.exports = DropdownView.extend({
   template: template,

@@ -21,7 +21,7 @@ import { hot } from 'react-hot-loader'
 
 const SortDropdownView = require('../../../component/dropdown/workspaces-filter/dropdown.workspaces-filter.view.js')
 const user = require('../../../component/singletons/user-instance.js')
-const store = require('../../../js/store.js')
+import { store } from '../../../js/store'
 
 const preferences = user.get('user').get('preferences')
 const LoadingView = require('../../../component/loading/loading.view.js')

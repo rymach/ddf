@@ -19,7 +19,7 @@ const $ = require('jquery')
 const CustomElements = require('../../js/CustomElements.js')
 const template = require('./dropdown.companion.hbs')
 const Common = require('../../js/Common.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const DropdownBehaviorUtility = require('../../behaviors/dropdown.behavior.utility.js')
 const router = require('../router/router.js')
 require('../../behaviors/navigation.behavior.js')

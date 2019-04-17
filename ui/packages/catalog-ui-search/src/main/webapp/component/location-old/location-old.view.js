@@ -45,7 +45,7 @@ const LocationView = withAdapter(
 const Marionette = require('marionette')
 const _ = require('underscore')
 const wreqr = require('../../js/wreqr.js')
-const store = require('../../js/store.js')
+import { store } from '../../js/store'
 const CustomElements = require('../../js/CustomElements.js')
 const LocationOldModel = require('./location-old')
 const CQLUtils = require('../../js/CQLUtils.js')
