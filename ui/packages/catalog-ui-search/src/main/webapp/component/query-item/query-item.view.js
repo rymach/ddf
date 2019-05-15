@@ -130,6 +130,7 @@ module.exports = Marionette.LayoutView.extend({
     )
   },
   runQuery: function(e) {
+    hello.sentry
     this.model.startSearchFromFirstPage()
     e.stopPropagation()
   },
