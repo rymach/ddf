@@ -24,13 +24,18 @@ import styled from '../../styles/styled-components'
 import { Button, buttonTypeEnum } from '../button'
 import { hot } from 'react-hot-loader'
 
-export type SettingsComponent = {
+
+export type SimpleSettingsComponent = {
   component: JSX.Element
-  custom: boolean
-  text?: string
-  icon?: string
-  children?: React.ReactNode
+  text: string
+  icon: string
 }
+
+export type CustomSettingsComponent = {
+  componentContent?: React.ReactNode
+}
+
+export type SettingsComponent = SimpleSettingsComponent & CustomSettingsComponent
 
 export type withExtensions = {
   extensions: SettingsComponent[]
@@ -108,23 +113,19 @@ class UserSettings extends React.Component<Props, State> {
     const { extensions } = this.props
     const { component } = this.state
     const extensionComponents = extensions.map((extension: SettingsComponent) => {
-      if(extension.custom) {
-        return extension.children
-      } else {
-        return (
-          <NavigationButton
-            key={extension.text}
-            buttonType={buttonTypeEnum.neutral}
-            text={extension.text}
-            icon={extension.icon}
-            onClick={() => {
-                this.updateComponent(extension.component)
-              }
+      return extension.componentContent || (
+        <NavigationButton
+          key={extension.text}
+          buttonType={buttonTypeEnum.neutral}
+          text={extension.text}
+          icon={extension.icon}
+          onClick={() => {
+              this.updateComponent(extension.component)
             }
-            disabled={Boolean(component)}
-          />
-        )
-      }
+          }
+          disabled={Boolean(component)}
+        />
+      )
     })
     return (
       <Root component={component}>
