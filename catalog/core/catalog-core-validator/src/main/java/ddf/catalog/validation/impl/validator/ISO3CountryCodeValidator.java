@@ -21,11 +21,12 @@ import ddf.catalog.validation.impl.violation.ValidationViolationImpl;
 import ddf.catalog.validation.report.AttributeValidationReport;
 import ddf.catalog.validation.violation.ValidationViolation;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.codice.countrycode.standard.CountryCode;
 import org.codice.countrycode.standard.StandardProvider;
 import org.codice.countrycode.standard.StandardRegistryImpl;
 
@@ -40,7 +41,16 @@ public class ISO3CountryCodeValidator implements AttributeValidator {
 
   private final boolean ignoreCase;
 
-  private final Set<String> countryCodes;
+  private final Set<String[]> countryCodes = new HashSet<>();
+
+  private boolean isValid(String code) {
+    for (String[] countryCode : countryCodes) {
+      if (code.equals(countryCode[1])) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   public ISO3CountryCodeValidator(final boolean ignoreCase) {
     this.ignoreCase = ignoreCase;
@@ -53,12 +63,10 @@ public class ISO3CountryCodeValidator implements AttributeValidator {
           "StandardProvider lookup failed for [" + ISO_3166 + ", " + VERSION + "]");
     }
 
-    countryCodes =
-        standardProvider
-            .getStandardEntries()
-            .stream()
-            .map(cc -> cc.getAsFormat("alpha3"))
-            .collect(Collectors.toSet());
+    for (CountryCode standardEntry : standardProvider.getStandardEntries()) {
+      String[] s = {standardEntry.getName(), standardEntry.getAsFormat("alpha3")};
+      countryCodes.add(s);
+    }
   }
 
   /**
@@ -86,7 +94,7 @@ public class ISO3CountryCodeValidator implements AttributeValidator {
         .filter(String.class::isInstance)
         .map(String.class::cast)
         .map(ignoreCase ? String::toUpperCase : String::toString)
-        .filter(s -> !countryCodes.contains(s))
+        .filter(s -> !isValid(s))
         .map(
             s ->
                 new ValidationViolationImpl(
@@ -95,7 +103,9 @@ public class ISO3CountryCodeValidator implements AttributeValidator {
                     ValidationViolation.Severity.ERROR))
         .forEach(report::addViolation);
 
-    countryCodes.forEach(report::addSuggestedValue);
+    for (String[] countryCode : countryCodes) {
+      report.addSuggestedValue(countryCode[0], countryCode[1]);
+    }
 
     return report;
   }

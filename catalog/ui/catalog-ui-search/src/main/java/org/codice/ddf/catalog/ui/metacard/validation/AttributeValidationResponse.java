@@ -19,10 +19,10 @@ import java.util.Set;
 public class AttributeValidationResponse {
   private Set<ValidationViolation> violations;
 
-  private Set<String> suggestedValues;
+  private Set<String[]> suggestedValues;
 
   public AttributeValidationResponse(
-      Set<ValidationViolation> violations, Set<String> suggestedValues) {
+      Set<ValidationViolation> violations, Set<String[]> suggestedValues) {
     this.violations = violations;
     this.suggestedValues = suggestedValues;
   }
@@ -35,11 +35,11 @@ public class AttributeValidationResponse {
     this.violations = violations;
   }
 
-  public Set<String> getSuggestedValues() {
+  public Set<String[]> getSuggestedValues() {
     return suggestedValues;
   }
 
-  public void setSuggestedValues(Set<String> suggestedValues) {
+  public void setSuggestedValues(Set<String[]> suggestedValues) {
     this.suggestedValues = suggestedValues;
   }
 }

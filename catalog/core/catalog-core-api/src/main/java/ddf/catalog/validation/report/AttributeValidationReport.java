@@ -39,5 +39,5 @@ public interface AttributeValidationReport {
    *
    * @return the set of suggested values or an empty set if there are none
    */
-  Set<String> getSuggestedValues();
+  Set<String[]> getSuggestedValues();
 }

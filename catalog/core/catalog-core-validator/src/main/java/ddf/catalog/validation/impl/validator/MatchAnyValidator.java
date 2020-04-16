@@ -84,7 +84,7 @@ public class MatchAnyValidator implements AttributeValidator {
 
       Set<ValidationViolation> validationViolations =
           attributeValidationReport.getAttributeValidationViolations();
-      Set<String> suggestedValues = attributeValidationReport.getSuggestedValues();
+      Set<String[]> suggestedValues = attributeValidationReport.getSuggestedValues();
 
       result.addViolations(validationViolations);
 

@@ -67,7 +67,7 @@ public class ExperimentalEnumerationExtractor {
     this.attributeInjectors = attributeInjectors;
   }
 
-  public Map<String, Set<String>> getAttributeEnumerations(String attribute) {
+  public Map<String, Set<String[]>> getAttributeEnumerations(String attribute) {
     return attributeValidatorRegistry
         .getValidators(attribute)
         .stream()
@@ -91,7 +91,7 @@ public class ExperimentalEnumerationExtractor {
         .orElseGet(HashMap::new);
   }
 
-  public Map<String, Set<String>> getEnumerations(@Nullable String metacardType) {
+  public Map<String, Set<String[]>> getEnumerations(@Nullable String metacardType) {
     if (isBlank(metacardType)) {
       metacardType = MetacardImpl.BASIC_METACARD.getName();
     }

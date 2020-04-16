@@ -23,7 +23,7 @@ import java.util.Set;
 public class AttributeValidationReportImpl implements AttributeValidationReport {
   private final Set<ValidationViolation> attributeValidationViolations = new HashSet<>();
 
-  private final Set<String> suggestedValues = new HashSet<>();
+  private final Set<String[]> suggestedValues = new HashSet<>();
 
   /**
    * Adds a {@link ValidationViolation} to the report.
@@ -57,9 +57,14 @@ public class AttributeValidationReportImpl implements AttributeValidationReport 
    * @throws IllegalArgumentException if {@code value} is null
    */
   public void addSuggestedValue(final String value) {
-    Preconditions.checkArgument(value != null, "The suggested value cannot be null.");
+    addSuggestedValue(value, value);
+  }
 
-    suggestedValues.add(value);
+  public void addSuggestedValue(final String label, final String value) {
+    Preconditions.checkArgument(value != null, "The suggested value cannot be null.");
+    Preconditions.checkArgument(label != null, "The suggested label cannot be null.");
+    String[] s = {label, value};
+    suggestedValues.add(s);
   }
 
   /**
@@ -68,7 +73,7 @@ public class AttributeValidationReportImpl implements AttributeValidationReport 
    * @param values a set of suggested attribute values to add to the report, cannot be null or empty
    * @throws IllegalArgumentException if {@code value} is null or empty
    */
-  public void addSuggestedValues(Set<String> values) {
+  public void addSuggestedValues(Set<String[]> values) {
     Preconditions.checkArgument(values != null, "The suggested values cannot be null.");
     Preconditions.checkArgument(values.size() > 0, "The suggested values cannot be empty.");
 
@@ -81,7 +86,7 @@ public class AttributeValidationReportImpl implements AttributeValidationReport 
   }
 
   @Override
-  public Set<String> getSuggestedValues() {
+  public Set<String[]> getSuggestedValues() {
     return Collections.unmodifiableSet(suggestedValues);
   }
 }
